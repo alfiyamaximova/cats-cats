@@ -1,0 +1,121 @@
+header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 20px;
+}
+
+.header__image {
+    height: 50px;
+}
+
+.header__text {
+    font-size: 20px;
+}
+
+main {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    gap: 50px;
+}
+
+footer {
+    margin-top: 20px;
+}
+
+.container-padding {
+    padding: 30px calc(50% - 500px);
+}
+
+.container-shadow {
+    box-shadow: 0 0 5px 0 #0006;
+}
+
+.card {
+    display: flex;
+    flex-direction: column;
+    max-width: 300px;
+    height: 300px;
+    padding: 30px;
+    box-sizing: border-box;
+    border-radius: 10px;
+    cursor: pointer;
+    background: #fff;
+    text-align: center;
+}
+
+.card:hover {
+    transform: scale(1.2, 1.2);
+    transition: 1s linear;
+    box-shadow: 0 0 5px 0 #0006, 0 0 15px 0 #0009;
+}
+
+.card__image {
+    max-width: 240px;
+    height: 100%;
+    border-radius: 10px;
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: cover;
+    opacity: .7;
+}
+
+.card:hover .card__image {
+    opacity: 1;
+    transition: 1s linear;
+}
+
+.card__rating {
+    display: flex;
+    justify-content: space-between;
+    padding: 0 20px;
+}
+
+.card__rating_star-image {
+    height: 10px;
+}
+
+.info-popup {
+    display: none;
+    justify-content: center;
+    align-items: center;
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: #0008;
+}
+
+.info-popup_active {
+    display: flex;
+}
+
+.info-popup__content {
+    display: grid;
+    grid-template-columns: repeat(2, 300px);
+    gap: 0 50px;
+    background-color: #fff;
+    padding: 30px;
+    border: 1px solid;
+    border-radius: 10px;
+    position: relative;
+    max-width: 1000px;
+}
+
+.info-popup__content__image {
+    width: 100%;
+}
+
+.info-popup__close-button {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    cursor: pointer;
+    background-image: url(img/close.png);
+    background-position: center 0;
+    background-size: contain;
+    background-repeat: no-repeat;
+    width: 50px;
+    height: 50px;
+}
