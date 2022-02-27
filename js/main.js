@@ -1,6 +1,12 @@
 import {cats} from "./data/cats.js";
 import {buildCard} from "./template/card.js";
 import {buildInfoPopupContent} from "./template/info-popup.js";
+import {loadUserName} from "./service/cats-session-storage.js";
+
+const userName = loadUserName();
+if (!userName) {
+    window.location.replace('auth.html');
+}
 
 const cardsGrid = document.getElementsByTagName('main')[0];
 const infoPopup = document.querySelector('.info-popup');

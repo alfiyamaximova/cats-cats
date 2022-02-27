@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <link rel="icon" href="img/logo.png">
+    <link rel="stylesheet" href="style.css">
+    <title>Авторизация доступа к Котикам</title>
+</head>
+<body>
+    <div class="screen-center">
+        <div class="auth-box container-shadow">
+            <h2>Для доступа к сайту Котики пожалуйста авторизуйтесь</h2>
+            <form id="userNameInputForm" class="form__user-name" onsubmit="onSubmitUsername(); return false;">
+                <span>Имя пользователя:</span>
+                <div>
+                    <input type="text" name="userNameInput">
+                    <button type="submit">Авторизовать</button>
+                </div>
+                <span class="user-name-error">Имя пользователя должно содержать хотябы одну букву или цифру</span>
+            </form>
+        </div>
+    </div>
+    <script type="module" src="js/service/cats-auth.js"></script>
+</body>
+</html>
