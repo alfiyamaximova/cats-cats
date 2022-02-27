@@ -128,7 +128,7 @@ footer {
     min-height: 100vh;
 }
 
-.auth-box {
+.edit-box {
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -152,4 +152,19 @@ footer {
 
 .user-name-error-active {
     display: flex;
+}
+
+.add-cat-form__input {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    padding-top: 10px;
+}
+
+.long-input-field {
+    width: 500px;
+}
+
+.add-cat-form__buttons-block {
+    padding-top: 40px;
 }
