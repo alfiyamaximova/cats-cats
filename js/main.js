@@ -1,27 +1,46 @@
-import {cats} from "./data/cats.js";
 import {buildCard} from "./template/card.js";
 import {buildInfoPopupContent} from "./template/info-popup.js";
-import {loadUserName} from "./service/cats-session-storage.js";
 
-const userName = loadUserName();
+import {getUserNameFromSession} from "./service/cats-session.js";
+import {fetchAllCats} from "./service/cats-api.js";
+import {getCatsFromStorage, putCatsToStorage} from "./service/cats-storage.js";
+import {isNotEmptyCatObject} from "./service/cats-validator.js";
+
+const infoPopup = document.querySelector('.info-popup');
+
+const userName = getUserNameFromSession();
 if (!userName) {
     window.location.replace('auth.html');
 }
 
-const cardsGrid = document.getElementsByTagName('main')[0];
-const infoPopup = document.querySelector('.info-popup');
+let cats = getCatsFromStorage();
+if (!cats) {
+    fetchAllCats().then(result => {
+        cats = result.data.filter(item => isNotEmptyCatObject(item));
+
+        putCatsToStorage(cats);
+
+        createCards(cats);
+    });
+} else {
+    createCards(cats);
+}
 
 // creation of the cats cards
-cats.forEach(cat => {
-    const templateElement = document.createElement('template');
-    templateElement.innerHTML = buildCard(cat);
+function createCards(cats) {
+    const cardsGrid = document.getElementsByTagName('main')[0];
 
-    const elementToAppend = templateElement.content.firstChild;
+    cats.forEach(cat => {
+        const templateElement = document.createElement('template');
+        templateElement.innerHTML = buildCard(cat);
 
-    elementToAppend.onclick = e => showCatInfoWindow(cat);
+        const elementToAppend = templateElement.content.firstChild;
 
-    cardsGrid.appendChild(elementToAppend);
-});
+        elementToAppend.onclick = e => showCatInfoWindow(cat);
+
+        cardsGrid.appendChild(elementToAppend);
+    });
+}
 
 function showCatInfoWindow(cat) {
     infoPopup.classList.add('info-popup_active');

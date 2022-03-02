@@ -10,7 +10,7 @@
 <div class="screen-center">
     <div class="edit-box container-shadow">
         <h2>Введите данные нового кота</h2>
-        <form id="editCatForm" onsubmit="onSubmitUsername(); return false;">
+        <form id="addCatForm" onsubmit="addNewCatToStorage(); return false;">
             <div>
                 <div class="add-cat-form__input">
                     <span>Имя (обязательно):</span>
@@ -30,7 +30,7 @@
                 </div>
                 <div class="add-cat-form__input">
                     <span>Фаворит:</span>
-                    <input type="checkbox" name="favorite">
+                    <input type="checkbox" name="favourite">
                 </div>
                 <div class="add-cat-form__input">
                     <span>Описание:</span>
@@ -43,6 +43,6 @@
         </form>
     </div>
 </div>
-<script type="module" src="js/service/cats-auth.js"></script>
+<script type="module" src="js/service/cats-storage.js"></script>
 </body>
 </html>

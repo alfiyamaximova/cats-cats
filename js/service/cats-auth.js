@@ -1,4 +1,4 @@
-import {saveUserName} from "./cats-session-storage.js";
+import {putUserNameToSession} from "./cats-session.js";
 
 const userNameErrorMessageSpan = document.getElementsByClassName('user-name-error')[0];
 
@@ -13,7 +13,7 @@ export function onSubmitUsername() {
 
     userName = userName.trim();
 
-    saveUserName(userName);
+    putUserNameToSession(userName);
 
     window.location.replace('index.html');
 }

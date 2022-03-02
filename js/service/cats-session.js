@@ -1,6 +1,6 @@
 const userNameKey = 'userName';
 
-export function saveUserName(userName) {
+export function putUserNameToSession(userName) {
     if (!userName) {
         return;
     }
@@ -8,6 +8,6 @@ export function saveUserName(userName) {
     sessionStorage.setItem(userNameKey, userName);
 }
 
-export function loadUserName() {
+export function getUserNameFromSession() {
     return sessionStorage.getItem(userNameKey);
 }
