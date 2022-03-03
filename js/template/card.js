@@ -9,6 +9,10 @@ export function buildCard(cat) {
                 <div class="card__rating">
                     ${ratingStarImages}
                 </div>
+                <div class="card__buttons">
+                    <button class="card__edit-cat-button">Редактировать</button>
+                    <button class="card__delete-cat-button">Удалить</button>
+                </div>
             </div>`;
 }
 

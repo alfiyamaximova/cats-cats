@@ -71,6 +71,28 @@ footer {
     padding: 0 20px;
 }
 
+.card__buttons {
+    padding-top: 20px;
+}
+
+button {
+    min-height: 30px;
+    border-radius: 10px;
+    border-width: 0;
+    color: white;
+    background-color: dodgerblue;
+}
+
+.header__add-cat-button {
+}
+
+.card__edit-cat-button {
+}
+
+.card__delete-cat-button {
+    background-color: darkmagenta;
+}
+
 .card__rating_star-image {
     height: 10px;
 }
@@ -154,7 +176,7 @@ footer {
     display: flex;
 }
 
-.add-cat-form__input {
+.edit-cat-form__input {
     display: flex;
     flex-direction: column;
     align-items: flex-start;
@@ -165,6 +187,6 @@ footer {
     width: 500px;
 }
 
-.add-cat-form__buttons-block {
+.edit-cat-form__buttons-block {
     padding-top: 40px;
 }

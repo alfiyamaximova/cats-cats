@@ -9,40 +9,40 @@
 <body>
 <div class="screen-center">
     <div class="edit-box container-shadow">
-        <h2>Введите данные нового кота</h2>
-        <form id="addCatForm" onsubmit="addNewCatToStorage(); return false;">
+        <h2 id="formHeader"></h2>
+        <form id="form" onsubmit="saveChanges(); return false;">
             <div>
-                <div class="add-cat-form__input">
+                <div class="edit-cat-form__input">
                     <span>Имя (обязательно):</span>
                     <input type="text" name="name" required>
                 </div>
-                <div class="add-cat-form__input">
+                <div class="edit-cat-form__input">
                     <span>Ссылка на фото (обязательно):</span>
                     <input class="long-input-field" type="text" name="img_link" required>
                 </div>
-                <div class="add-cat-form__input">
+                <div class="edit-cat-form__input">
                     <span>Возраст (обязательно):</span>
                     <input type="number" name="age" required>
                 </div>
-                <div class="add-cat-form__input">
+                <div class="edit-cat-form__input">
                     <span>Рейтинг:</span>
                     <input type="number" min="1" max="10" name="rate">
                 </div>
-                <div class="add-cat-form__input">
+                <div class="edit-cat-form__input">
                     <span>Фаворит:</span>
                     <input type="checkbox" name="favourite">
                 </div>
-                <div class="add-cat-form__input">
+                <div class="edit-cat-form__input">
                     <span>Описание:</span>
                     <textarea class="long-input-field" rows="3" name="description"></textarea>
                 </div>
             </div>
-            <div class="add-cat-form__buttons-block">
+            <div class="edit-cat-form__buttons-block">
                 <button type="submit">Сохранить</button>
             </div>
         </form>
     </div>
 </div>
-<script type="module" src="js/service/cats-storage.js"></script>
+<script type="module" src="js/service/cats-edit.js"></script>
 </body>
 </html>

@@ -36,13 +36,30 @@ function createCards(cats) {
 
         const elementToAppend = templateElement.content.firstChild;
 
-        elementToAppend.onclick = e => showCatInfoWindow(cat);
+        elementToAppend.onclick = e => showCatInfoWindow(e, cat);
+
+        const cardButtonsDivChildNodes = Array.from(
+            Array.from(elementToAppend.childNodes).find(child => child.className === 'card__buttons').childNodes
+        );
+
+        cardButtonsDivChildNodes
+            .find(child => child.className === 'card__edit-cat-button')
+            .onclick = e => onEditCat(cat.id);
+
+        cardButtonsDivChildNodes
+            .find(child => child.className === 'card__delete-cat-button')
+            .onclick = e => onDeleteCat(cat.id);
 
         cardsGrid.appendChild(elementToAppend);
     });
 }
 
-function showCatInfoWindow(cat) {
+function showCatInfoWindow(e, cat) {
+    if (e.target instanceof HTMLButtonElement) {
+        e.stopPropagation();
+        return;
+    }
+
     infoPopup.classList.add('info-popup_active');
 
     infoPopup.firstElementChild.innerHTML = buildInfoPopupContent(cat);
@@ -51,6 +68,14 @@ function showCatInfoWindow(cat) {
     closeButton.classList.add('info-popup__close-button');
     closeButton.onclick = closeInfo;
     infoPopup.firstElementChild.appendChild(closeButton);
+}
+
+function onEditCat(catId) {
+    window.location.href = `edit-cat.html?id=${catId}`;
+}
+
+function onDeleteCat(catId) {
+    console.log('delete: ', catId);
 }
 
 function closeInfo() {
