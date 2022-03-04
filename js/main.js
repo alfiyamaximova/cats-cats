@@ -3,8 +3,9 @@ import {buildInfoPopupContent} from "./template/info-popup.js";
 
 import {getUserNameFromSession} from "./service/cats-session.js";
 import {fetchAllCats} from "./service/cats-api.js";
-import {getCatsFromStorage, putCatsToStorage} from "./service/cats-storage.js";
+import {getCatsFromStorage, putCatsToStorage, removeCatsFromStorage} from "./service/cats-storage.js";
 import {isNotEmptyCatObject} from "./service/cats-validator.js";
+import {isEmptyArray} from "./utils/arrays.js";
 
 const infoPopup = document.querySelector('.info-popup');
 
@@ -14,7 +15,7 @@ if (!userName) {
 }
 
 let cats = getCatsFromStorage();
-if (!cats) {
+if (isEmptyArray(cats)) {
     fetchAllCats().then(result => {
         cats = result.data.filter(item => isNotEmptyCatObject(item));
 
@@ -81,3 +82,10 @@ function onDeleteCat(catId) {
 function closeInfo() {
     infoPopup.classList.remove('info-popup_active');
 }
+
+function regetAllCatsFromAPI() {
+    removeCatsFromStorage();
+    window.location.reload();
+}
+
+window.regetAllCatsFromAPI = regetAllCatsFromAPI;

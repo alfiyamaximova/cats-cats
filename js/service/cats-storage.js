@@ -18,3 +18,8 @@ export function putCatsToStorage(catsArray) {
     localStorage.setItem(catsArrayStorageKey, JSON.stringify(catsArray));
 }
 
+export function removeCatsFromStorage() {
+    localStorage.removeItem(catsArrayStorageKey);
+}
+
+

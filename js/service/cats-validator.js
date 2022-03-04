@@ -2,10 +2,7 @@ const catObjectRequiredFields = [
     'id',
     'name',
     'img_link',
-    'age',
-    'rate',
-    'favourite',
-    'description'
+    'age'
 ];
 
 export function isNotEmptyCatObject(obj) {

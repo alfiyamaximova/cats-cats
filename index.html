@@ -10,7 +10,10 @@
     <header class="container-padding container-shadow">
         <img class="header__image" src="img/cat-fill.svg" alt="Бабуленькины котики">
         <span class="header__text">Бабуленькины котики</span>
-        <button class="header__add-cat-button" onclick="window.location.href = 'edit-cat.html'">Добавить кота</button>
+        <div>
+            <button onclick="window.location.href = 'edit-cat.html'">Добавить нового кота</button>
+            <button onclick="regetAllCatsFromAPI()">Загрузить котов с сервера</button>
+        </div>
     </header>
 
     <main class="container-padding">
