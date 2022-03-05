@@ -2,7 +2,7 @@ import {buildCard} from "./template/card.js";
 import {buildInfoPopupContent} from "./template/info-popup.js";
 
 import {getUserNameFromSession} from "./service/cats-session.js";
-import {fetchAllCats} from "./service/cats-api.js";
+import {fetchAllCatsFromRemoteDb} from "./service/cats-api.js";
 import {getCatsFromStorage, putCatsToStorage, removeCatsFromStorage} from "./service/cats-storage.js";
 import {isNotEmptyCatObject} from "./service/cats-validator.js";
 import {isEmptyArray} from "./utils/arrays.js";
@@ -16,7 +16,7 @@ if (!userName) {
 
 let cats = getCatsFromStorage();
 if (isEmptyArray(cats)) {
-    fetchAllCats().then(result => {
+    fetchAllCatsFromRemoteDb().then(result => {
         cats = result.data.filter(item => isNotEmptyCatObject(item));
 
         putCatsToStorage(cats);

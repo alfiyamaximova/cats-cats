@@ -1,4 +1,5 @@
 import {getCatsFromStorage, putCatsToStorage} from "./cats-storage.js";
+import {nextId, addNewCatToRemoteDb, updateCatInRemoteDb} from "./cats-api.js";
 
 const urlSearchParams = new URLSearchParams(window.location.search);
 const params = Object.fromEntries(urlSearchParams.entries());
@@ -36,13 +37,17 @@ function saveChangesForNewCat() {
     const existingCats = getCatsFromStorage() || [];
 
     const newCatData = getFormData();
-    newCatData.id = nextId(existingCats);
 
-    existingCats.push(newCatData);
+    nextId().then(newId => {
+        newCatData.id = newId;
 
-    putCatsToStorage(existingCats);
+        existingCats.push(newCatData);
 
-    window.location.href = 'index.html'
+        putCatsToStorage(existingCats);
+
+        addNewCatToRemoteDb(newCatData)
+            .then(() => window.location.href = 'index.html');
+    });
 }
 
 function getFormData() {
@@ -56,10 +61,6 @@ function getFormData() {
         favourite: (data.get('favourite') === 'on'),
         description: data.get('description')
     }
-}
-
-function nextId(catsArray) {
-    return Math.max(...catsArray.map(cat => cat.id)) + 1;
 }
 
 function saveChangesForExistingCat() {
@@ -77,5 +78,6 @@ function saveChangesForExistingCat() {
 
     putCatsToStorage(existingCats);
 
-    window.location.href = 'index.html'
+    updateCatInRemoteDb(updatedCatData)
+        .then(() => window.location.href = 'index.html')
 }
