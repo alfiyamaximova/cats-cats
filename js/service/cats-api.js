@@ -35,3 +35,12 @@ export async function updateCatInRemoteDb(cat) {
 
     return response?.json();
 }
+
+export async function deleteCatInRemoteDb(catId) {
+    const response = await fetch(`${baseUrl}/delete/${catId}`, {
+        method: "DELETE"
+    });
+
+    return response?.json();
+}
+

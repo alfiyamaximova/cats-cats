@@ -1,9 +1,11 @@
 export function buildInfoPopupContent(cat) {
-    return `<img class="info-popup__content__image" src="${cat.img_link}" alt="${cat.name}">
+    return `<img class="modal-popup__content__image" src="${cat.img_link}" alt="${cat.name}">
             <div>
                 <h2>${cat.name}</h2>
                 <h3>${cat.age} ${getWord(cat.age, "год", "года", "лет")}</h3>
                 <p>${cat.description}</p>
+            </div>
+            <div class="modal-popup__close-button" onclick="closeModalPopup()">
             </div>`;
 }
 

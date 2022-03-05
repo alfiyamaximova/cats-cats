@@ -1,13 +1,14 @@
 import {buildCard} from "./template/card.js";
 import {buildInfoPopupContent} from "./template/info-popup.js";
+import {buildDeletePopupContent} from "./template/delete-popup.js";
 
 import {getUserNameFromSession} from "./service/cats-session.js";
-import {fetchAllCatsFromRemoteDb} from "./service/cats-api.js";
+import {deleteCatInRemoteDb, fetchAllCatsFromRemoteDb} from "./service/cats-api.js";
 import {getCatsFromStorage, putCatsToStorage, removeCatsFromStorage} from "./service/cats-storage.js";
 import {isNotEmptyCatObject} from "./service/cats-validator.js";
 import {isEmptyArray} from "./utils/arrays.js";
 
-const infoPopup = document.querySelector('.info-popup');
+const modalPopup = document.querySelector('.modal-popup');
 
 const userName = getUserNameFromSession();
 if (!userName) {
@@ -49,7 +50,7 @@ function createCards(cats) {
 
         cardButtonsDivChildNodes
             .find(child => child.className === 'card__delete-cat-button')
-            .onclick = e => onDeleteCat(cat.id);
+            .onclick = e => onDeleteCat(cat);
 
         cardsGrid.appendChild(elementToAppend);
     });
@@ -61,26 +62,23 @@ function showCatInfoWindow(e, cat) {
         return;
     }
 
-    infoPopup.classList.add('info-popup_active');
+    modalPopup.classList.add('modal-popup_active');
 
-    infoPopup.firstElementChild.innerHTML = buildInfoPopupContent(cat);
-
-    const closeButton = document.createElement('div');
-    closeButton.classList.add('info-popup__close-button');
-    closeButton.onclick = closeInfo;
-    infoPopup.firstElementChild.appendChild(closeButton);
+    modalPopup.firstElementChild.innerHTML = buildInfoPopupContent(cat);
 }
 
 function onEditCat(catId) {
     window.location.href = `edit-cat.html?id=${catId}`;
 }
 
-function onDeleteCat(catId) {
-    console.log('delete: ', catId);
+function onDeleteCat(cat) {
+    modalPopup.classList.add('modal-popup_active');
+
+    modalPopup.firstElementChild.innerHTML = buildDeletePopupContent(cat);
 }
 
-function closeInfo() {
-    infoPopup.classList.remove('info-popup_active');
+function closeModalPopup() {
+    modalPopup.classList.remove('modal-popup_active');
 }
 
 function regetAllCatsFromAPI() {
@@ -88,4 +86,20 @@ function regetAllCatsFromAPI() {
     window.location.reload();
 }
 
+function deleteCatData(catId) {
+ if (!catId) {
+     return;
+ }
+
+ const existingCats = getCatsFromStorage() || [];
+
+ removeCatsFromStorage();
+ putCatsToStorage(existingCats.filter(cat => cat.id !== catId));
+
+ deleteCatInRemoteDb(catId)
+     .then(() => window.location.href = 'index.html');
+}
+
 window.regetAllCatsFromAPI = regetAllCatsFromAPI;
+window.closeModalPopup = closeModalPopup;
+window.deleteCatData = deleteCatData;
